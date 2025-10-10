@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "",
+    "text": "Healthcare-associated infections (HAIs) are illnesses acquired during hospital care. They increase treatment costs, prolong hospital stays, and may lead to disability or death.\nAlthough Germany’s hospital prevalence of HAIs is lower than the EU/EEA average, the population-level burden is higher. This apparent paradox arises from Germany’s high hospital admission rates and longer average lengths of stay.\nThis blog post analyses data from the ECDC Point Prevalence Survey (2011 - 2012) to explain Germany’s elevated burden and identify which infection types matter most. The five HAI types considered account for ≈79% of HAIs in the PPS frame:\n- Clostridioides difficile infection (CDI)\n- Hospital-acquired pneumonia (HAP)\n- Bloodstream infection (BSI)\n- Urinary tract infection (UTI)\n- Surgical site infection (SSI)"
+  },
+  {
+    "objectID": "posts/welcome/index.html#data-source",
+    "href": "posts/welcome/index.html#data-source",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "Data source",
+    "text": "Data source\nThis analysis draws on the European Centre for Disease Prevention and Control (ECDC) Point Prevalence Survey, 2011–2012. Burden estimates were calculated using the BCoDE methodology (Burden of Communicable Diseases in Europe), implemented in the BHAI R package (Willrich, Zacher, and Haller 2019)."
+  },
+  {
+    "objectID": "posts/welcome/index.html#germany-vs-eueea",
+    "href": "posts/welcome/index.html#germany-vs-eueea",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "Germany vs EU/EEA",
+    "text": "Germany vs EU/EEA\nTable 1 shows annual cases, deaths, and disability-adjusted life years (DALYs) per 100,000 population. Germany exceeds the EU/EEA average in all measures.\n\n\nCode\nburden &lt;- data.frame(\n  Metric   = c(\"Cases (per 100k)\", \"Deaths (per 100k)\", \"DALYs (per 100k)\"),\n  Germany  = c(592, 20.1, 308),\n  EU_EEA   = c(468, 15.6, 290)\n)\n\nknitr::kable(\n  burden,\n  caption = NULL,\n  align = c(\"l\",\"r\",\"r\"),\n  booktabs = TRUE\n)\n\n\n\n\nTable 1: Estimated HAI burden per 100,000 population, Germany vs EU/EEA (2011–2012)\n\n\n\n\n\n\nMetric\nGermany\nEU_EEA\n\n\n\n\nCases (per 100k)\n592.0\n468.0\n\n\nDeaths (per 100k)\n20.1\n15.6\n\n\nDALYs (per 100k)\n308.0\n290.0\n\n\n\n\n\n\n\n\nFigure 1 displays DALYs for major HAI types in Germany. Hospital-acquired pneumonia (HAP) and bloodstream infections (BSI) dominate mortality, while urinary tract infections (UTI) and surgical site infections (SSI) contribute to disability.\n\n\nCode\nlibrary(ggplot2)\n\ntypes_totals &lt;- data.frame(\n  Infection = c(\"HAP\",\"BSI\",\"UTI\",\"SSI\",\"CDI\"),\n  DALYs = c(69508, 58350, 66701, 28842, 20890)\n)\n\nggplot(types_totals, aes(x = Infection, y = DALYs)) +\n  geom_col(fill = \"#274060\") +\n  geom_text(aes(label = scales::comma(DALYs)),\n            vjust = -0.35, size = 3.5) +\n  labs(title = \"DALYs by infection type in Germany (absolute)\",\n       x = \"Infection type\",\n       y = \"DALYs (years)\",\n       caption = \"Source: ECDC PPS 2011–2012; BHAI estimates (German PPS sample).\") +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(face = \"bold\", color = \"#005c97\"),\n    axis.text.x = element_text(angle = 10, hjust = 1),\n    panel.grid.minor = element_blank()\n  )\n\n\n\n\n\n\n\n\nFigure 1: Germany’s HAI burden by infection type (DALYs, German PPS 2011–2012)\n\n\n\n\n\nTable 2 breaks this down by infection type.\n- Germany’s case rate for UTI is ~1.5× higher than the EU/EEA average (265 vs 175 per 100 k).\n- CDI and BSI show notably higher fatality and DALY rates.\n- HAP rates are slightly lower in Germany, yet the absolute burden remains large due to long stays and recurrent pneumonia among older inpatients.\n\n\nCode\ntypes_rates &lt;- data.frame(\n  Infection = c(\"HAP\",\"UTI\",\"BSI\",\"SSI\",\"CDI\",\"ALL\"),\n  Germany_cases = c(132.0, 265.1, 33.4, 115.4, 44.6, 592.1),\n  EU_EEA_cases  = c(143.7, 174.7, 22.2, 111.3, 16.0, 467.9),\n  Germany_deaths = c(4.9, 4.5, 4.8, 2.9, 2.4, 20.1),\n  EU_EEA_deaths  = c(5.3, 3.0, 3.3, 2.6, 0.9, 15.3),\n  Germany_DALYs  = c(86.1, 82.6, 72.2, 35.7, 25.9, 308.2),\n  EU_EEA_DALYs   = c(109.8, 57.1, 76.2, 35.1, 10.0, 290.0)\n)\n\nknitr::kable(\n  types_rates,\n  caption = NULL,\n  align = c(\"l\",\"r\",\"r\",\"r\",\"r\",\"r\",\"r\"),\n  booktabs = TRUE,\n  col.names = c(\"Infection\",\"Cases DE\",\"Cases EU\",\"Deaths DE\",\"Deaths EU\",\"DALYs DE\",\"DALYs EU\")\n)\n\n\n\n\nTable 2: HAI burden per 100,000 by infection type: Germany (PPS) vs EU/EEA (ECDC PPS), 2011–2012\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInfection\nCases DE\nCases EU\nDeaths DE\nDeaths EU\nDALYs DE\nDALYs EU\n\n\n\n\nHAP\n132.0\n143.7\n4.9\n5.3\n86.1\n109.8\n\n\nUTI\n265.1\n174.7\n4.5\n3.0\n82.6\n57.1\n\n\nBSI\n33.4\n22.2\n4.8\n3.3\n72.2\n76.2\n\n\nSSI\n115.4\n111.3\n2.9\n2.6\n35.7\n35.1\n\n\nCDI\n44.6\n16.0\n2.4\n0.9\n25.9\n10.0\n\n\nALL\n592.1\n467.9\n20.1\n15.3\n308.2\n290.0\n\n\n\n\n\n\n\n\nTogether, these tables demonstrate that Germany’s excess burden stems not from one pathogen but from system-wide exposure and patient throughput: more admissions and longer hospital stays amplify even modest infection risks."
+  },
+  {
+    "objectID": "posts/welcome/index.html#findings",
+    "href": "posts/welcome/index.html#findings",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "Findings",
+    "text": "Findings\n\nGermany had ≈478,000 cases, 16,000 deaths, and 249,000 DALYs from HAIs in 2011–2012\nHAP and BSI caused more than half the total burden despite fewer cases.\nUTI was the most common infection but had lower fatality.\nSSI contributed disproportionately to disability.\nHAIs imposed a greater health burden than influenza, salmonella, hepatitis B, and measles combined\n\nThese findings link back to the problem statement: Germany’s system-level hospital practices amplify the burden despite lower prevalence."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "\nHi, I’m Nhu Nguyen\n",
+    "section": "",
+    "text": "Business Analytics student at Monash moving toward data analyst / data science. I blend databases & SQL, spatial data, and visualisation with logistics experience.\n\n\nAbout me Read the blog\n\n\n\n\n\n\n\n\n\nWhat you’ll find\n\n\n\nShort, clear data stories & visualisations\n\n\nMethod notes & reproducible snippets\n\n\nReflections from logistics → analytics\n\n\n\nNew here?\n\n\n\nRead the latest blog\n\n\nSee my code on GitHub\n\n\nGet in touch: email me\n\n\n\n\n\n\n\n\nDatabases & SQL\n\n\n\n\n\nSpatial data\n\n\n\n\n\nVisualisation"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Nhu Nguyen",
+    "section": "",
+    "text": "Melbourne, Australia\n\n\nLinkedIn · GitHub · nguyenthunhu2603@gmail.com\n\n\nI’m a Master’s student in Business Analytics at Monash University, where I’m building toward a career that blends data analysis, logistics, and strategy. My background spans international logistics and supply chain operations, and over time I’ve grown increasingly focused on how data can tell better stories and drive smarter decisions. I work mainly with SQL, R, and Python to turn raw, messy data into clear insights and simple predictive models that actually help things move, and move faster.\nI like clean processes, reproducible workflows, and work that feels structured but creative. My experience ranges from coordinating sea freight operations and building reporting prototypes to leading small project teams and solving real-time logistics issues.\n\n\n\n\nSQL (PostgreSQL/SQLite)\nR (tidyverse/ggplot2)\nPython (pandas) ·\nData analysis and visualization · Descriptive stats, regression, and basic ML ·\nWorkflow tools: Quarto, R Markdown, Git/GitHub\n\n\n\n\n\nAssistant Manager, Taket Oy (2024–present) : Oversee project coordination, budget tracking, and team logistics to keep operations running smoothly.\n\nCustomer Service Coordinator, Dachser Air & Sea Logistics (2023) : Managed international shipments, documentation, and issue resolution across teams and carriers.\n\nProject Coordinator Trainee, Hacklin Logistics (2022) : Built a prototype reporting tool to improve communication between cross-functional teams.\n\n\n\n\n\nMaster of Business Analytics, Monash University (current)\n\nBBA, International Business, LAB University of Applied Sciences, Finland (2022)\n\nExchange, Business Information Systems, Frankfurt University of Applied Sciences (2021)\n\nBBA, International Business, University of Economics Ho Chi Minh City (2018)\n\n\n\n\n📍 Melbourne, Australia\n🔗 LinkedIn · GitHub\n✉️ nguyenthuynhu2603@gmail.com"
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "Nhu Nguyen",
+    "section": "",
+    "text": "I’m a Master’s student in Business Analytics at Monash University, where I’m building toward a career that blends data analysis, logistics, and strategy. My background spans international logistics and supply chain operations, and over time I’ve grown increasingly focused on how data can tell better stories and drive smarter decisions. I work mainly with SQL, R, and Python to turn raw, messy data into clear insights and simple predictive models that actually help things move, and move faster.\nI like clean processes, reproducible workflows, and work that feels structured but creative. My experience ranges from coordinating sea freight operations and building reporting prototypes to leading small project teams and solving real-time logistics issues."
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "Nhu Nguyen",
+    "section": "",
+    "text": "SQL (PostgreSQL/SQLite)\nR (tidyverse/ggplot2)\nPython (pandas) ·\nData analysis and visualization · Descriptive stats, regression, and basic ML ·\nWorkflow tools: Quarto, R Markdown, Git/GitHub"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "Nhu Nguyen",
+    "section": "",
+    "text": "Assistant Manager, Taket Oy (2024–present) : Oversee project coordination, budget tracking, and team logistics to keep operations running smoothly.\n\nCustomer Service Coordinator, Dachser Air & Sea Logistics (2023) : Managed international shipments, documentation, and issue resolution across teams and carriers.\n\nProject Coordinator Trainee, Hacklin Logistics (2022) : Built a prototype reporting tool to improve communication between cross-functional teams."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Nhu Nguyen",
+    "section": "",
+    "text": "Master of Business Analytics, Monash University (current)\n\nBBA, International Business, LAB University of Applied Sciences, Finland (2022)\n\nExchange, Business Information Systems, Frankfurt University of Applied Sciences (2021)\n\nBBA, International Business, University of Economics Ho Chi Minh City (2018)"
+  },
+  {
+    "objectID": "about.html#contact",
+    "href": "about.html#contact",
+    "title": "Nhu Nguyen",
+    "section": "",
+    "text": "📍 Melbourne, Australia\n🔗 LinkedIn · GitHub\n✉️ nguyenthuynhu2603@gmail.com"
+  },
+  {
+    "objectID": "posts/welcome/blog_review.html",
+    "href": "posts/welcome/blog_review.html",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "",
+    "text": "Healthcare-associated infections (HAIs) are illnesses patients acquire during hospital care. They extend hospital stays, increase costs, and can lead to disability or death. Although Germany’s hospitals report lower infection prevalence than the EU/EEA average, the population-level burden is higher, largely due to high admission rates and longer lengths of stay.\nThis post compares Germany’s HAI burden with the EU/EEA and highlights which infection types matter most."
+  },
+  {
+    "objectID": "posts/welcome/blog_review.html#sec-problem",
+    "href": "posts/welcome/blog_review.html#sec-problem",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "",
+    "text": "Healthcare-associated infections (HAIs) are illnesses patients acquire during hospital care. They extend hospital stays, increase costs, and can lead to disability or death. Although Germany’s hospitals report lower infection prevalence than the EU/EEA average, the population-level burden is higher, largely due to high admission rates and longer lengths of stay.\nThis post compares Germany’s HAI burden with the EU/EEA and highlights which infection types matter most."
+  },
+  {
+    "objectID": "posts/welcome/blog_review.html#sec-data",
+    "href": "posts/welcome/blog_review.html#sec-data",
+    "title": "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe",
+    "section": "Data description",
+    "text": "Data description\nSource. European Centre for Disease Prevention and Control (ECDC) Point Prevalence Survey, 2011–2012.\nFocus. Five major HAIs that represent ~80% of cases: CDI, HAP, BSI, UTI, and SSI.\n\nCleaning & modelling (high level)\nEstimates convert hospital prevalence to incidence and burden (DALYs) using the BCoDE approach, implemented in the open-source BHAI R package. Key adjustments: infection duration, outcomes/comorbidities, and uncertainty."
+  }
+]
