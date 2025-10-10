@@ -1,0 +1,21 @@
+---
+title: "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe"
+author: "Thuy Nhu Nguyen"
+date: 2025-09-20
+categories: [health, analytics, assignment]
+bibliography: references.bib
+---
+
+## Problem description {#sec-problem}
+
+Healthcare-associated infections (HAIs) are illnesses patients acquire during hospital care. They extend hospital stays, increase costs, and can lead to disability or death. Although Germany’s hospitals report **lower infection prevalence** than the EU/EEA average, the **population-level burden is higher**, largely due to **high admission rates and longer lengths of stay**.  
+This post compares Germany’s HAI burden with the EU/EEA and highlights which infection types matter most.
+
+## Data description {#sec-data}
+
+**Source.** European Centre for Disease Prevention and Control (ECDC) Point Prevalence Survey, 2011–2012.  
+**Focus.** Five major HAIs that represent ~80% of cases: CDI, HAP, BSI, UTI, and SSI.
+
+### Cleaning & modelling (high level)
+
+Estimates convert hospital **prevalence** to **incidence and burden** (DALYs) using the BCoDE approach, implemented in the open-source **BHAI** R package. Key adjustments: infection duration, outcomes/comorbidities, and uncertainty.

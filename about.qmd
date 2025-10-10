@@ -1,13 +1,63 @@
 ---
-title: "About"
-image: profile.jpg
-about:
-  template: jolla
-  links:
-    - icon: github
-      text: Github
-      href: https://github.com/etc5523-2022
-
+title: " "
+page-layout: full
+resources:
+  - profile1.jpg
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: cyborg
+    css: styles.css   
+    toc: false
+    smooth-scroll: true
+    html-math-method: katex
+    execute:
+      echo: false
+      eval: false
+      code-fold: false
+    html: true
 ---
 
-This is a blog template for the ETC5523 Communicating with Data assessment at Monash University.
+# Nhu Nguyen
+
+![Melbourne, Australia](profile1.jpg){.profile-photo}
+
+[LinkedIn](https://www.linkedin.com/in/thuy-nhu-nguyen-95a262195/) · [GitHub](https://github.com/Amberlynn9) · [nguyenthunhu2603@gmail.com](mailto:nguyenthunhu2603@gmail.com)
+
+## About Me {.section-card}
+
+I’m a Master’s student in Business Analytics at Monash University, where I’m building toward a career that blends data analysis, logistics, and strategy. My background spans international logistics and supply chain operations, and over time I’ve grown increasingly focused on how data can tell better stories and drive smarter decisions. I work mainly with SQL, R, and Python to turn raw, messy data into clear insights and simple predictive models that actually help things move, and move faster.
+
+I like clean processes, reproducible workflows, and work that feels structured but creative. My experience ranges from coordinating sea freight operations and building reporting prototypes to leading small project teams and solving real-time logistics issues.
+
+## Skills {.section-card}
+
+-   SQL (PostgreSQL/SQLite)
+
+-   R (tidyverse/ggplot2)
+
+-   Python (pandas) ·
+
+-   Data analysis and visualization · Descriptive stats, regression, and basic ML ·
+
+-   Workflow tools: Quarto, R Markdown, Git/GitHub
+
+## Experience {.section-card}
+
+-   **Assistant Manager, Taket Oy (2024–present)** : Oversee project coordination, budget tracking, and team logistics to keep operations running smoothly.\
+-   **Customer Service Coordinator, Dachser Air & Sea Logistics (2023)** : Managed international shipments, documentation, and issue resolution across teams and carriers.\
+-   **Project Coordinator Trainee, Hacklin Logistics (2022)** : Built a prototype reporting tool to improve communication between cross-functional teams.
+
+## Education {.section-card}
+
+-   **Master of Business Analytics**, Monash University *(current)*\
+-   **BBA, International Business**, LAB University of Applied Sciences, Finland *(2022)*\
+-   **Exchange**, Business Information Systems, Frankfurt University of Applied Sciences *(2021)*\
+-   **BBA, International Business**, University of Economics Ho Chi Minh City *(2018)*
+
+## Contact {.section-card}
+
+📍 Melbourne, Australia\
+🔗 [LinkedIn](https://www.linkedin.com/in/thuy-nhu-nguyen-95a262195/) · [GitHub](https://github.com/Amberlynn9)\
+✉️ [nguyenthuynhu2603\@gmail.com](mailto:nguyenthuynhu2603@gmail.com)

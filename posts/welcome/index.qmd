@@ -1,12 +1,161 @@
 ---
-title: "Welcome To My Blog Template"
-author: "Emi Tanaka"
-date: "2022-07-18"
-categories: [news]
+title: "Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe"
+author: "Nhu Nguyen"
+date: 2025-09-20
+categories: [health, analytics, assignment]
+bibliography: references.bib
+listing:
+  contents:
+    - posts/welcome/*.qmd
+  sort: "date desc"
+format:
+  html:
+    toc: true
+    toc-depth: 3       
+    toc-location: left  
+    number-sections: false
+
 ---
 
-This is the first post in a Quarto blog. Welcome!
+# Problem description
 
-![](thumbnail.jpg)
+Healthcare-associated infections (HAIs) are illnesses acquired during hospital care. They increase treatment costs, prolong hospital stays, and may lead to disability or death.
+
+Although Germany’s hospital prevalence of HAIs is lower than the EU/EEA average, the population-level burden is higher. This apparent paradox arises from Germany’s *high hospital admission rates* and *longer average lengths of stay*.
+
+This blog post analyses data from the ECDC Point Prevalence Survey (2011 - 2012) to explain Germany’s elevated burden and identify which infection types matter most. The five HAI types considered account for **≈79%** of HAIs in the PPS frame:\
+- Clostridioides difficile infection (CDI)\
+- Hospital-acquired pneumonia (HAP)\
+- Bloodstream infection (BSI)\
+- Urinary tract infection (UTI)\
+- Surgical site infection (SSI)
+
+# Analysis
+
+## Data source
+
+This analysis draws on the *European Centre for Disease Prevention and Control (ECDC) Point Prevalence Survey, 2011–2012*. 
+Burden estimates were calculated using the *BCoDE methodology* (Burden of Communicable Diseases in Europe), implemented in the *BHAI R package* [@willrich2019bhai].
 
 
+## Germany vs EU/EEA
+
+@tbl-burden shows annual cases, deaths, and disability-adjusted life years (DALYs) per 100,000 population. Germany exceeds the EU/EEA average in all measures.
+
+```{r, message=FALSE, warning=FALSE}
+#| label: tbl-burden
+#| tbl-cap: "Estimated HAI burden per 100,000 population, Germany vs EU/EEA (2011–2012)"
+#| message: false
+#| warning: false
+#| code-fold: true
+
+burden <- data.frame(
+  Metric   = c("Cases (per 100k)", "Deaths (per 100k)", "DALYs (per 100k)"),
+  Germany  = c(592, 20.1, 308),
+  EU_EEA   = c(468, 15.6, 290)
+)
+
+knitr::kable(
+  burden,
+  caption = NULL,
+  align = c("l","r","r"),
+  booktabs = TRUE
+)
+
+
+```
+
+@fig-types displays DALYs for major HAI types in Germany. Hospital-acquired pneumonia (HAP) and bloodstream infections (BSI) dominate mortality, while urinary tract infections (UTI) and surgical site infections (SSI) contribute to disability.
+
+```{r}
+#| label: fig-types
+#| fig-cap: "Germany’s HAI burden by infection type (DALYs, German PPS 2011–2012)"
+#| fig-width: 7
+#| fig-height: 4.5
+#| message: false
+#| warning: false
+#| code-fold: true
+
+library(ggplot2)
+
+types_totals <- data.frame(
+  Infection = c("HAP","BSI","UTI","SSI","CDI"),
+  DALYs = c(69508, 58350, 66701, 28842, 20890)
+)
+
+ggplot(types_totals, aes(x = Infection, y = DALYs)) +
+  geom_col(fill = "#274060") +
+  geom_text(aes(label = scales::comma(DALYs)),
+            vjust = -0.35, size = 3.5) +
+  labs(title = "DALYs by infection type in Germany (absolute)",
+       x = "Infection type",
+       y = "DALYs (years)",
+       caption = "Source: ECDC PPS 2011–2012; BHAI estimates (German PPS sample).") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", color = "#005c97"),
+    axis.text.x = element_text(angle = 10, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
+
+```
+
+@tbl-type-rates breaks this down by infection type.  
+- Germany’s case rate for **UTI** is ~1.5× higher than the EU/EEA average (265 vs 175 per 100 k).  
+- **CDI** and **BSI** show notably higher fatality and DALY rates.  
+- **HAP** rates are slightly lower in Germany, yet the absolute burden remains large due to long stays and recurrent pneumonia among older inpatients.  
+
+```{r}
+#| label: tbl-type-rates
+#| tbl-cap: "HAI burden per 100,000 by infection type: Germany (PPS) vs EU/EEA (ECDC PPS), 2011–2012"
+#| message: false
+#| warning: false
+#| code-fold: true
+
+types_rates <- data.frame(
+  Infection = c("HAP","UTI","BSI","SSI","CDI","ALL"),
+  Germany_cases = c(132.0, 265.1, 33.4, 115.4, 44.6, 592.1),
+  EU_EEA_cases  = c(143.7, 174.7, 22.2, 111.3, 16.0, 467.9),
+  Germany_deaths = c(4.9, 4.5, 4.8, 2.9, 2.4, 20.1),
+  EU_EEA_deaths  = c(5.3, 3.0, 3.3, 2.6, 0.9, 15.3),
+  Germany_DALYs  = c(86.1, 82.6, 72.2, 35.7, 25.9, 308.2),
+  EU_EEA_DALYs   = c(109.8, 57.1, 76.2, 35.1, 10.0, 290.0)
+)
+
+knitr::kable(
+  types_rates,
+  caption = NULL,
+  align = c("l","r","r","r","r","r","r"),
+  booktabs = TRUE,
+  col.names = c("Infection","Cases DE","Cases EU","Deaths DE","Deaths EU","DALYs DE","DALYs EU")
+)
+
+```
+
+Together, these tables demonstrate that Germany’s excess burden stems not from one pathogen but from **system-wide exposure and patient throughput**: more admissions and longer hospital stays amplify even modest infection risks.
+
+## Findings
+
+-   Germany had ≈478,000 cases, 16,000 deaths, and 249,000 DALYs from HAIs in 2011–2012
+
+-   HAP and BSI caused more than half the total burden despite fewer cases.
+
+-   UTI was the most common infection but had lower fatality.
+
+-   SSI contributed disproportionately to disability.
+
+-   HAIs imposed a greater health burden than influenza, salmonella, hepatitis B, and measles combined
+
+These findings link back to the problem statement: Germany’s system-level hospital practices amplify the burden despite lower prevalence.
+
+# Conclusion
+
+Germany’s elevated HAI burden is primarily system-driven rather than patient-driven.  
+Lower per-patient prevalence is outweighed by:
+1. High hospital admission rates, and  
+2. Prolonged inpatient durations.
+
+The analysis shows that **HAP** and **BSI** drive mortality, while **UTI** and **SSI** dominate morbidity and disability.  
+This pattern mirrors findings by Cassini et al. (2016) [@cassini2016] and Zacher et al. (2019) [@zacher2019], confirming that the national healthcare structure, rather than clinical hygiene alone that underlies the disproportionate population burden.
+
+**Key takeaway:** To reduce the national burden of HAIs, Germany must pair infection control measures with *systemic reforms* that shorten hospital stays and optimize admission practices.

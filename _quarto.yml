@@ -2,16 +2,28 @@ project:
   type: website
 
 website:
-  title: "blog-template"
+  title: "Nhu Nguyen — Data & Analytics"
   navbar:
-    right:
-      - about.qmd
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Blog
+        href: posts/welcome/index.qmd
+      - text: About
+        href: about.qmd
       - icon: github
-        href: https://github.com/etc5523-2022
+        aria-label: GitHub
+        href: https://github.com/Amberlynn9
+
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: cyborg
     css: styles.css
+    toc: false
+    smooth-scroll: true
+
 
 
 
