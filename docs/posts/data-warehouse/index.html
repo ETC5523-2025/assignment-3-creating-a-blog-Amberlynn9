@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nhu Nguyen">
-<meta name="dcterms.date" content="2025-09-20">
+<meta name="dcterms.date" content="2025-09-27">
+<meta name="description" content="Designing a star schema data warehouse in Oracle SQL — cleaning messy real-world data, building fact and dimension tables, and uncovering $11.58M in business insights.">
 
-<title>Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe – Nhu Nguyen — Data &amp; Analytics</title>
+<title>Sales &amp; Hire Analytics: Building a Data Warehouse from Scratch – Nhu Nguyen — Data &amp; Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,62 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -87,8 +33,6 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -131,71 +75,13 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: [],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -402,40 +288,30 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#problem-description" id="toc-problem-description" class="nav-link active" data-scroll-target="#problem-description">Problem description</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
-  <ul class="collapse">
-  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data source</a></li>
-  <li><a href="#germany-vs-eueea" id="toc-germany-vs-eueea" class="nav-link" data-scroll-target="#germany-vs-eueea">Germany vs EU/EEA</a></li>
-  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe</h1>
+<h1 class="title">Sales &amp; Hire Analytics: Building a Data Warehouse from Scratch</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">health</div>
-    <div class="quarto-category">analytics</div>
-    <div class="quarto-category">assignment</div>
+    <div class="quarto-category">SQL</div>
+    <div class="quarto-category">Data Warehouse</div>
+    <div class="quarto-category">Oracle</div>
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Data Cleaning</div>
+    <div class="quarto-category">Business Analytics</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    Designing a star schema data warehouse in Oracle SQL — cleaning messy real-world data, building fact and dimension tables, and uncovering $11.58M in business insights.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -450,7 +326,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 20, 2025</p>
+      <p class="date">September 27, 2025</p>
     </div>
   </div>
   
@@ -462,278 +338,168 @@ window.Quarto = {
 </header>
 
 
-<section id="problem-description" class="level1">
-<h1>Problem description</h1>
-<p>Healthcare-associated infections (HAIs) are illnesses acquired during hospital care. They increase treatment costs, prolong hospital stays, and may lead to disability or death.</p>
-<p>Although Germany’s hospital prevalence of HAIs is lower than the EU/EEA average, the population-level burden is higher. This apparent paradox arises from Germany’s <em>high hospital admission rates</em> and <em>longer average lengths of stay</em>.</p>
-<p>This blog post analyses data from the ECDC Point Prevalence Survey (2011 - 2012) to explain Germany’s elevated burden and identify which infection types matter most. The five HAI types considered account for <strong>≈79%</strong> of HAIs in the PPS frame:<br>
-- Clostridioides difficile infection (CDI)<br>
-- Hospital-acquired pneumonia (HAP)<br>
-- Bloodstream infection (BSI)<br>
-- Urinary tract infection (UTI)<br>
-- Surgical site infection (SSI)</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This project turned raw, messy operational data from a fictional equipment company (MonEquip) into a fully functioning business intelligence data warehouse — complete with cleaned facts, conformed dimensions, and actionable KPIs.</p>
+<p>The dataset covered sales and hire transactions from April 2018 to December 2020.</p>
 </section>
-<section id="analysis" class="level1">
-<h1>Analysis</h1>
-<section id="data-source" class="level2">
-<h2 class="anchored" data-anchor-id="data-source">Data source</h2>
-<p>This analysis draws on the <em>European Centre for Disease Prevention and Control (ECDC) Point Prevalence Survey, 2011–2012</em>. Burden estimates were calculated using the <em>BCoDE methodology</em> (Burden of Communicable Diseases in Europe), implemented in the <em>BHAI R package</em> <span class="citation" data-cites="willrich2019bhai">(<a href="#ref-willrich2019bhai" role="doc-biblioref">Willrich, Zacher, and Haller 2019</a>)</span>.</p>
-</section>
-<section id="germany-vs-eueea" class="level2">
-<h2 class="anchored" data-anchor-id="germany-vs-eueea">Germany vs EU/EEA</h2>
-<p><a href="#tbl-burden" class="quarto-xref">Table&nbsp;1</a> shows annual cases, deaths, and disability-adjusted life years (DALYs) per 100,000 population. Germany exceeds the EU/EEA average in all measures.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>burden <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metric   =</span> <span class="fu">c</span>(<span class="st">"Cases (per 100k)"</span>, <span class="st">"Deaths (per 100k)"</span>, <span class="st">"DALYs (per 100k)"</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany  =</span> <span class="fu">c</span>(<span class="dv">592</span>, <span class="fl">20.1</span>, <span class="dv">308</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA   =</span> <span class="fu">c</span>(<span class="dv">468</span>, <span class="fl">15.6</span>, <span class="dv">290</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  burden,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div id="tbl-burden" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-burden-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Estimated HAI burden per 100,000 population, Germany vs EU/EEA (2011–2012)
-</figcaption>
-<div aria-describedby="tbl-burden-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Metric</th>
-<th style="text-align: right;">Germany</th>
-<th style="text-align: right;">EU_EEA</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Cases (per 100k)</td>
-<td style="text-align: right;">592.0</td>
-<td style="text-align: right;">468.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Deaths (per 100k)</td>
-<td style="text-align: right;">20.1</td>
-<td style="text-align: right;">15.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">DALYs (per 100k)</td>
-<td style="text-align: right;">308.0</td>
-<td style="text-align: right;">290.0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p><a href="#fig-types" class="quarto-xref">Figure&nbsp;1</a> displays DALYs for major HAI types in Germany. Hospital-acquired pneumonia (HAP) and bloodstream infections (BSI) dominate mortality, while urinary tract infections (UTI) and surgical site infections (SSI) contribute to disability.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>types_totals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Infection =</span> <span class="fu">c</span>(<span class="st">"HAP"</span>,<span class="st">"BSI"</span>,<span class="st">"UTI"</span>,<span class="st">"SSI"</span>,<span class="st">"CDI"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">DALYs =</span> <span class="fu">c</span>(<span class="dv">69508</span>, <span class="dv">58350</span>, <span class="dv">66701</span>, <span class="dv">28842</span>, <span class="dv">20890</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(types_totals, <span class="fu">aes</span>(<span class="at">x =</span> Infection, <span class="at">y =</span> DALYs)) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#274060"</span>) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">comma</span>(DALYs)),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.35</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"DALYs by infection type in Germany (absolute)"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Infection type"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"DALYs (years)"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: ECDC PPS 2011–2012; BHAI estimates (German PPS sample)."</span>) <span class="sc">+</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#005c97"</span>),</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">10</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-types" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-types-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Germany’s HAI burden by infection type (DALYs, German PPS 2011–2012)
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="#tbl-type-rates" class="quarto-xref">Table&nbsp;2</a> breaks this down by infection type.<br>
-- Germany’s case rate for <strong>UTI</strong> is ~1.5× higher than the EU/EEA average (265 vs 175 per 100 k).<br>
-- <strong>CDI</strong> and <strong>BSI</strong> show notably higher fatality and DALY rates.<br>
-- <strong>HAP</strong> rates are slightly lower in Germany, yet the absolute burden remains large due to long stays and recurrent pneumonia among older inpatients.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>types_rates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Infection =</span> <span class="fu">c</span>(<span class="st">"HAP"</span>,<span class="st">"UTI"</span>,<span class="st">"BSI"</span>,<span class="st">"SSI"</span>,<span class="st">"CDI"</span>,<span class="st">"ALL"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany_cases =</span> <span class="fu">c</span>(<span class="fl">132.0</span>, <span class="fl">265.1</span>, <span class="fl">33.4</span>, <span class="fl">115.4</span>, <span class="fl">44.6</span>, <span class="fl">592.1</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA_cases  =</span> <span class="fu">c</span>(<span class="fl">143.7</span>, <span class="fl">174.7</span>, <span class="fl">22.2</span>, <span class="fl">111.3</span>, <span class="fl">16.0</span>, <span class="fl">467.9</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany_deaths =</span> <span class="fu">c</span>(<span class="fl">4.9</span>, <span class="fl">4.5</span>, <span class="fl">4.8</span>, <span class="fl">2.9</span>, <span class="fl">2.4</span>, <span class="fl">20.1</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA_deaths  =</span> <span class="fu">c</span>(<span class="fl">5.3</span>, <span class="fl">3.0</span>, <span class="fl">3.3</span>, <span class="fl">2.6</span>, <span class="fl">0.9</span>, <span class="fl">15.3</span>),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany_DALYs  =</span> <span class="fu">c</span>(<span class="fl">86.1</span>, <span class="fl">82.6</span>, <span class="fl">72.2</span>, <span class="fl">35.7</span>, <span class="fl">25.9</span>, <span class="fl">308.2</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA_DALYs   =</span> <span class="fu">c</span>(<span class="fl">109.8</span>, <span class="fl">57.1</span>, <span class="fl">76.2</span>, <span class="fl">35.1</span>, <span class="fl">10.0</span>, <span class="fl">290.0</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  types_rates,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>),</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Infection"</span>,<span class="st">"Cases DE"</span>,<span class="st">"Cases EU"</span>,<span class="st">"Deaths DE"</span>,<span class="st">"Deaths EU"</span>,<span class="st">"DALYs DE"</span>,<span class="st">"DALYs EU"</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div id="tbl-type-rates" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-type-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: HAI burden per 100,000 by infection type: Germany (PPS) vs EU/EEA (ECDC PPS), 2011–2012
-</figcaption>
-<div aria-describedby="tbl-type-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<section id="the-problem-dirty-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-dirty-data">The Problem: Dirty Data</h2>
+<p>Before any analysis could happen, the raw data needed serious cleaning. I identified and resolved <strong>6 types of data errors</strong>:</p>
+<table class="caption-top table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 13%">
-<col style="width: 13%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Infection</th>
-<th style="text-align: right;">Cases DE</th>
-<th style="text-align: right;">Cases EU</th>
-<th style="text-align: right;">Deaths DE</th>
-<th style="text-align: right;">Deaths EU</th>
-<th style="text-align: right;">DALYs DE</th>
-<th style="text-align: right;">DALYs EU</th>
+<th>Error Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">HAP</td>
-<td style="text-align: right;">132.0</td>
-<td style="text-align: right;">143.7</td>
-<td style="text-align: right;">4.9</td>
-<td style="text-align: right;">5.3</td>
-<td style="text-align: right;">86.1</td>
-<td style="text-align: right;">109.8</td>
+<td>Negative quantities</td>
+<td>Sales rows with quantity ≤ 0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">UTI</td>
-<td style="text-align: right;">265.1</td>
-<td style="text-align: right;">174.7</td>
-<td style="text-align: right;">4.5</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">82.6</td>
-<td style="text-align: right;">57.1</td>
+<td>Negative/zero prices</td>
+<td>Hire rows with invalid total prices</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BSI</td>
-<td style="text-align: right;">33.4</td>
-<td style="text-align: right;">22.2</td>
-<td style="text-align: right;">4.8</td>
-<td style="text-align: right;">3.3</td>
-<td style="text-align: right;">72.2</td>
-<td style="text-align: right;">76.2</td>
+<td>Date inconsistencies</td>
+<td>END_DATE before START_DATE</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SSI</td>
-<td style="text-align: right;">115.4</td>
-<td style="text-align: right;">111.3</td>
-<td style="text-align: right;">2.9</td>
-<td style="text-align: right;">2.6</td>
-<td style="text-align: right;">35.7</td>
-<td style="text-align: right;">35.1</td>
+<td>Duplicate records</td>
+<td>CUSTOMER_ID appearing multiple times</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">CDI</td>
-<td style="text-align: right;">44.6</td>
-<td style="text-align: right;">16.0</td>
-<td style="text-align: right;">2.4</td>
-<td style="text-align: right;">0.9</td>
-<td style="text-align: right;">25.9</td>
-<td style="text-align: right;">10.0</td>
+<td>Orphan foreign keys</td>
+<td>Hire rows referencing missing customers, equipment, or staff</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ALL</td>
-<td style="text-align: right;">592.1</td>
-<td style="text-align: right;">467.9</td>
-<td style="text-align: right;">20.1</td>
-<td style="text-align: right;">15.3</td>
-<td style="text-align: right;">308.2</td>
-<td style="text-align: right;">290.0</td>
+<td>Mismatched totals</td>
+<td>TOTAL_SALES_PRICE ≠ QUANTITY × UNIT_SALES_PRICE</td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
+<p>Each error type was quarantined into a dedicated issue table for audit traceability, then clean versions were built excluding invalid rows.</p>
+</section>
+<section id="star-schema-design" class="level2">
+<h2 class="anchored" data-anchor-id="star-schema-design">Star Schema Design</h2>
+<p>I designed a <strong>multi-fact constellation (galaxy) schema</strong> with two primary fact tables sharing conformed dimensions:</p>
+<p><strong>Fact Tables:</strong></p>
+<ul>
+<li><code>SalesFact</code> — one row per sales transaction line</li>
+<li><code>HireFact</code> — one row per hire transaction line</li>
+</ul>
+<p><strong>Shared Dimensions:</strong></p>
+<ul>
+<li><code>TimeDim</code> — pre-computed Year, Month, Season for trend analysis</li>
+<li><code>BranchDim</code> — company branch locations</li>
+<li><code>CategoryDim</code> — equipment categories (Earthmoving, Landscaping, etc.)</li>
+<li><code>CustomerTypeDim</code> — Business vs Individual customers</li>
+</ul>
+<p><strong>Sales-only Dimension:</strong></p>
+<ul>
+<li><code>SalesPriceScaleDim</code> — Low / Medium / High price buckets</li>
+</ul>
+<p>All fact-dimension joins were validated with zero missing keys before analysis.</p>
+</section>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<section id="revenue-overview-20182020" class="level3">
+<h3 class="anchored" data-anchor-id="revenue-overview-20182020">Revenue Overview (2018–2020)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Sales</th>
+<th>Hire</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Total Revenue</td>
+<td>$11.58M</td>
+<td>$0.14M</td>
+</tr>
+<tr class="even">
+<td>Avg per Transaction</td>
+<td>$77,220</td>
+<td>$470</td>
+</tr>
+<tr class="odd">
+<td>Units</td>
+<td>393 sold</td>
+<td>617 hired</td>
+</tr>
+</tbody>
+</table>
+<p>Sales completely dominate revenue. Hire generates many small, short transactions.</p>
+</section>
+<section id="top-categories" class="level3">
+<h3 class="anchored" data-anchor-id="top-categories">Top Categories</h3>
+<p>Earthmoving (17.6%) and Landscaping (13.3%) together account for over 30% of total sales revenue — the company’s core strength lies in heavy construction equipment.</p>
+</section>
+<section id="branch-performance" class="level3">
+<h3 class="anchored" data-anchor-id="branch-performance">Branch Performance</h3>
+<p>Clayton branch leads with nearly $2.8M in revenue — more than double Parkville ($1.45M). Clayton has a diverse portfolio across almost all categories and acts as a central revenue hub.</p>
+</section>
+<section id="seasonality" class="level3">
+<h3 class="anchored" data-anchor-id="seasonality">Seasonality</h3>
+<ul>
+<li>Sales peak in <strong>Summer and Spring</strong>, with a broad step-change growth of <strong>+57.5%</strong> in 2020</li>
+<li>Hire peaks in <strong>Spring and Autumn</strong> — aligned with project start and finish windows</li>
+<li>Same-day hires account for only <strong>9.9%</strong> of hire revenue; multi-day rentals dominate</li>
+</ul>
+</section>
+<section id="year-over-year-growth" class="level3">
+<h3 class="anchored" data-anchor-id="year-over-year-growth">Year-over-Year Growth</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Period</th>
+<th>Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2018 → 2019</td>
+<td>+2.4%</td>
+</tr>
+<tr class="even">
+<td>2019 → 2020</td>
+<td>+57.5%</td>
+</tr>
+</tbody>
+</table>
+<p>The 2020 jump was broad-based across all months and seasons — suggesting a structural shift in demand rather than a one-off event.</p>
+</section>
+</section>
+<section id="visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation">Visualisation</h2>
+<p>The final analytics were visualised as a one-page poster in R, combining a star schema diagram, bar charts, donut charts, and a monthly revenue trend line.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="poster.png" class="img-fluid figure-img"></p>
+<figcaption>Sales &amp; Hire Analytics Poster</figcaption>
 </figure>
 </div>
-</div>
-<p>Together, these tables demonstrate that Germany’s excess burden stems not from one pathogen but from <strong>system-wide exposure and patient throughput</strong>: more admissions and longer hospital stays amplify even modest infection risks.</p>
 </section>
-<section id="findings" class="level2">
-<h2 class="anchored" data-anchor-id="findings">Findings</h2>
-<ul>
-<li><p>Germany had ≈478,000 cases, 16,000 deaths, and 249,000 DALYs from HAIs in 2011–2012</p></li>
-<li><p>HAP and BSI caused more than half the total burden despite fewer cases.</p></li>
-<li><p>UTI was the most common infection but had lower fatality.</p></li>
-<li><p>SSI contributed disproportionately to disability.</p></li>
-<li><p>HAIs imposed a greater health burden than influenza, salmonella, hepatitis B, and measles combined</p></li>
-</ul>
-<p>These findings link back to the problem statement: Germany’s system-level hospital practices amplify the burden despite lower prevalence.</p>
+<section id="tools-used" class="level2">
+<h2 class="anchored" data-anchor-id="tools-used">Tools Used</h2>
+<p><code>Oracle SQL</code> · <code>R</code> · <code>ggplot2</code> · <code>Lucidchart</code> · <code>DBeaver</code> · <code>Star Schema Design</code></p>
 </section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>Germany’s elevated HAI burden is primarily system-driven rather than patient-driven.<br>
-Lower per-patient prevalence is outweighed by: 1. High hospital admission rates, and<br>
-2. Prolonged inpatient durations.</p>
-<p>The analysis shows that <strong>HAP</strong> and <strong>BSI</strong> drive mortality, while <strong>UTI</strong> and <strong>SSI</strong> dominate morbidity and disability.<br>
-This pattern mirrors findings by Cassini et al.&nbsp;(2016) <span class="citation" data-cites="cassini2016">(<a href="#ref-cassini2016" role="doc-biblioref">Cassini et al. 2016</a>)</span> and Zacher et al.&nbsp;(2019) <span class="citation" data-cites="zacher2019">(<a href="#ref-zacher2019" role="doc-biblioref">Zacher et al. 2019</a>)</span>, confirming that the national healthcare structure, rather than clinical hygiene alone that underlies the disproportionate population burden.</p>
-<p><strong>Key takeaway:</strong> To reduce the national burden of HAIs, Germany must pair infection control measures with <em>systemic reforms</em> that shorten hospital stays and optimize admission practices.</p>
-
-
+<section id="takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways">Takeaways</h2>
+<p>This project taught me how real-world data is never clean, and how important it is to build auditable cleaning pipelines before touching any analysis. Designing the star schema also showed me how grain decisions — what one row represents — fundamentally shape what questions you can and can’t answer downstream.</p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-cassini2016" class="csl-entry" role="listitem">
-Cassini, Alessandro, Diamantis Plachouras, Tim Eckmanns, Muna Abu Sin, Hans-Peter Blank, Thomas Ducomble, Sebastian Haller, et al. 2016. <span>“Burden of Six Healthcare-Associated Infections on European Population Health: Estimating Incidence-Based Disability-Adjusted Life Years Through a Population Prevalence-Based Modelling Study.”</span> <em>PLoS Medicine</em> 13 (10): e1002150. <a href="https://doi.org/10.1371/journal.pmed.1002150">https://doi.org/10.1371/journal.pmed.1002150</a>.
-</div>
-<div id="ref-willrich2019bhai" class="csl-entry" role="listitem">
-Willrich, Niklas, Benedikt Zacher, and Sebastian Haller. 2019. <em>BHAI: Burden of Healthcare-Associated Infections</em>. <a href="https://CRAN.R-project.org/package=BHAI">https://CRAN.R-project.org/package=BHAI</a>.
-</div>
-<div id="ref-zacher2019" class="csl-entry" role="listitem">
-Zacher, Benedikt, Sebastian Haller, Niklas Willrich, Jan Walter, Muna Abu Sin, Alessandro Cassini, Diamantis Plachouras, et al. 2019. <span>“Application of a New Methodology and r Package Reveals a High Burden of Healthcare-Associated Infections (HAI) in Germany Compared to the Average in the European Union/European Economic Area, 2011 to 2012.”</span> <em>Eurosurveillance</em> 24 (46): 1900135. <a href="https://doi.org/10.2807/1560-7917.ES.2019.24.46.1900135">https://doi.org/10.2807/1560-7917.ES.2019.24.46.1900135</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

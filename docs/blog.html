@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>quarto-inpute17cd09eff8fd40a – Nhu Nguyen — Data &amp; Analytics</title>
+<title>Blog – Nhu Nguyen — Data &amp; Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -72,8 +74,66 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -262,11 +322,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link active" href="./blog.html" aria-current="page"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -286,71 +346,152 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YW5hbHl0aWNz">analytics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXNzaWdubWVudA==">assignment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QnVzaW5lc3MlMjBBbmFseXRpY3M=">Business Analytics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMENsZWFuaW5n">Data Cleaning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMFZpc3VhbGlzYXRpb24=">Data Visualisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMFdhcmVob3VzZQ==">Data Warehouse <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aGVhbHRo">health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T3JhY2xl">Oracle <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9zdGdyZVNRTA==">PostgreSQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UUdJUw==">QGIS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3BhdGlhbCUyMEFuYWx5c2lz">Spatial Analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U1FM">SQL <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
 
-
-
-
-<section id="nhu-nguyen" class="level1">
-<h1>Nhu Nguyen</h1>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="profile1.jpg" class="profile-photo img-fluid figure-img"></p>
-<figcaption>Melbourne, Australia</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Blog</h1>
 </div>
-<p><a href="https://www.linkedin.com/in/thuy-nhu-nguyen-95a262195/">LinkedIn</a> · <a href="https://github.com/Amberlynn9">GitHub</a> · <a href="mailto:nguyenthunhu2603@gmail.com">nguyenthunhu2603@gmail.com</a></p>
-<section id="about-me" class="level2 section-card">
-<h2 class="section-card anchored" data-anchor-id="about-me">About Me</h2>
-<p>I’m a Master’s student in Business Analytics at Monash University, where I’m building toward a career that blends data analysis, logistics, and strategy. My background spans international logistics and supply chain operations, and over time I’ve grown increasingly focused on how data can tell better stories and drive smarter decisions. I work mainly with SQL, R, and Python to turn raw, messy data into clear insights and simple predictive models that actually help things move, and move faster.</p>
-<p>I like clean processes, reproducible workflows, and work that feels structured but creative. My experience ranges from coordinating sea freight operations and building reporting prototypes to leading small project teams and solving real-time logistics issues.</p>
-</section>
-<section id="skills" class="level2 section-card">
-<h2 class="section-card anchored" data-anchor-id="skills">Skills</h2>
-<ul>
-<li><p>SQL (PostgreSQL/SQLite)</p></li>
-<li><p>R (tidyverse/ggplot2)</p></li>
-<li><p>Python (pandas) ·</p></li>
-<li><p>Data analysis and visualization · Descriptive stats, regression, and basic ML ·</p></li>
-<li><p>Workflow tools: Quarto, R Markdown, Git/GitHub</p></li>
-</ul>
-</section>
-<section id="experience" class="level2 section-card">
-<h2 class="section-card anchored" data-anchor-id="experience">Experience</h2>
-<ul>
-<li><strong>Assistant Manager, Taket Oy (2024–present)</strong> : Oversee project coordination, budget tracking, and team logistics to keep operations running smoothly.<br>
-</li>
-<li><strong>Customer Service Coordinator, Dachser Air &amp; Sea Logistics (2023)</strong> : Managed international shipments, documentation, and issue resolution across teams and carriers.<br>
-</li>
-<li><strong>Project Coordinator Trainee, Hacklin Logistics (2022)</strong> : Built a prototype reporting tool to improve communication between cross-functional teams.</li>
-</ul>
-</section>
-<section id="education" class="level2 section-card">
-<h2 class="section-card anchored" data-anchor-id="education">Education</h2>
-<ul>
-<li><strong>Master of Business Analytics</strong>, Monash University <em>(current)</em><br>
-</li>
-<li><strong>BBA, International Business</strong>, LAB University of Applied Sciences, Finland <em>(2022)</em><br>
-</li>
-<li><strong>Exchange</strong>, Business Information Systems, Frankfurt University of Applied Sciences <em>(2021)</em><br>
-</li>
-<li><strong>BBA, International Business</strong>, University of Economics Ho Chi Minh City <em>(2018)</em></li>
-</ul>
-</section>
-<section id="contact" class="level2 section-card">
-<h2 class="section-card anchored" data-anchor-id="contact">Contact</h2>
-<p>📍 Melbourne, Australia<br>
-🔗 <a href="https://www.linkedin.com/in/thuy-nhu-nguyen-95a262195/">LinkedIn</a> · <a href="https://github.com/Amberlynn9">GitHub</a><br>
-✉️ <a href="mailto:nguyenthuynhu2603@gmail.com">nguyenthuynhu2603@gmail.com</a></p>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="U1FMJTJDU3BhdGlhbCUyMEFuYWx5c2lzJTJDUG9zdGdyZVNRTCUyQ1FHSVMlMkNEYXRhJTIwVmlzdWFsaXNhdGlvbg==" data-listing-date-sort="1762002000000" data-listing-file-modified-sort="1778919864536" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="409">
+<div class="thumbnail"><a href="./posts/bus-accessibility/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/bus-accessibility/map.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/bus-accessibility/index.html" class="no-external">Bus Accessibility in Metropolitan Melbourne</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U1FM'); return false;">SQL</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('U3BhdGlhbCUyMEFuYWx5c2lz'); return false;">Spatial Analysis</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UG9zdGdyZVNRTA=='); return false;">PostgreSQL</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UUdJUw=='); return false;">QGIS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFZpc3VhbGlzYXRpb24='); return false;">Data Visualisation</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/bus-accessibility/index.html" class="no-external">
+<p>A spatial analysis of bus stop coverage across 46,000+ residential mesh blocks using PostgreSQL/PostGIS and QGIS.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/bus-accessibility/index.html" class="no-external">
+<div class="listing-date">
+Nov 2, 2025
+</div>
+<div class="listing-author">
+Nhu Nguyen
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="U1FMJTJDRGF0YSUyMFdhcmVob3VzZSUyQ09yYWNsZSUyQ1IlMkNEYXRhJTIwQ2xlYW5pbmclMkNCdXNpbmVzcyUyMEFuYWx5dGljcw==" data-listing-date-sort="1758895200000" data-listing-file-modified-sort="1778919606438" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="505">
+<div class="thumbnail"><a href="./posts/data-warehouse/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/data-warehouse/poster.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/data-warehouse/index.html" class="no-external">Sales &amp; Hire Analytics: Building a Data Warehouse from Scratch</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U1FM'); return false;">SQL</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFdhcmVob3VzZQ=='); return false;">Data Warehouse</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('T3JhY2xl'); return false;">Oracle</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMENsZWFuaW5n'); return false;">Data Cleaning</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QnVzaW5lc3MlMjBBbmFseXRpY3M='); return false;">Business Analytics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/data-warehouse/index.html" class="no-external">
+<p>Designing a star schema data warehouse in Oracle SQL — cleaning messy real-world data, building fact and dimension tables, and uncovering $11.58M in business insights.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/data-warehouse/index.html" class="no-external">
+<div class="listing-date">
+Sep 27, 2025
+</div>
+<div class="listing-author">
+Nhu Nguyen
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="aGVhbHRoJTJDYW5hbHl0aWNzJTJDYXNzaWdubWVudA==" data-listing-date-sort="1758290400000" data-listing-file-modified-sort="1778917125127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="817">
+<div class="thumbnail"><a href="./posts/welcome/index.html" class="no-external">
+
+<p class="card-img-top"><img src="posts\welcome\index_files\figure-html\fig-types-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/welcome/index.html" class="no-external">Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('aGVhbHRo'); return false;">health</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YW5hbHl0aWNz'); return false;">analytics</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXNzaWdubWVudA=='); return false;">assignment</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/welcome/index.html" class="no-external">
+Healthcare-associated infections (HAIs) are illnesses acquired during hospital care. They increase treatment costs, prolong hospital stays, and may lead to disability or…
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/welcome/index.html" class="no-external">
+<div class="listing-date">
+Sep 20, 2025
+</div>
+<div class="listing-author">
+Nhu Nguyen
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

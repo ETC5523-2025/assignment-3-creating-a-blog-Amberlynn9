@@ -6,10 +6,10 @@ page-layout: full
 <!-- START HERO — raw HTML, no code fences, no leading spaces --> <section class="hero-panel sky"> <div class="hero-left"> <h1>Hi, I’m Nhu Nguyen</h1> <p class="lead"> Business Analytics student at Monash moving toward <strong>data analyst / data science</strong>. I blend <strong>databases &amp; SQL</strong>, <strong>spatial data</strong>, and <strong>visualisation</strong> with logistics experience. </p>
 <div class="cta-row">
   <a class="btn btn-primary" href="about.qmd">About me</a>
-  <a class="btn btn-ghost" href="posts/welcome/index.qmd">Read the blog</a>
+  <a class="btn btn-ghost" href="blog.qmd">Read the blog</a>
 </div>
 
-</div> <figure class="hero-right"> <img src="images/hero-network.jpg" alt="Abstract network in light blue"> </figure> </section> <!-- END HERO --> <section class="card block"> <h3>What you’ll find</h3> <ul> <li>Short, clear data stories &amp; visualisations</li> <li>Method notes &amp; reproducible snippets</li> <li>Reflections from logistics → analytics</li> </ul> <h3>New here?</h3> <ul> <li>Read the latest <a href="posts/welcome/index.qmd">blog</a></li> <li>See my code on <a href="https://github.com/Amberlynn9">GitHub</a></li> <li>Get in touch: <a href="mailto:nguyenthuynhu2603@gmail.com">email me</a></li> </ul> </section>
+</div> <figure class="hero-right"> <img src="images/hero-network.jpg" alt="Abstract network in light blue"> </figure> </section> <!-- END HERO --> <section class="card block"> <h3>What you’ll find</h3> <ul> <li>Short, clear data stories &amp; visualisations</li> <li>Method notes &amp; reproducible snippets</li> <li>Reflections from logistics → analytics</li> </ul> <h3>New here?</h3> <ul> <li>Read the latest <a href="blog.qmd">blog</a></li> <li>See my code on <a href="https://github.com/Amberlynn9">GitHub</a></li> <li>Get in touch: <a href="mailto:nguyenthuynhu2603@gmail.com">email me</a></li> </ul> </section>
 
 
 <!-- A different image treatment: compact strip with captions -->

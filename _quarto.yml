@@ -9,7 +9,7 @@ website:
       - text: Home
         href: index.qmd
       - text: Blog
-        href: posts/welcome/index.qmd
+        href: blog.qmd
       - text: About
         href: about.qmd
       - icon: github

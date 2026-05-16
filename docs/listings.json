@@ -2,5 +2,13 @@
   {
     "listing": "/posts/welcome/index.html",
     "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/bus-accessibility/index.html",
+      "/posts/data-warehouse/index.html",
+      "/posts/welcome/index.html"
+    ]
   }
 ]

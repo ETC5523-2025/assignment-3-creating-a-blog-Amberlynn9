@@ -1,0 +1,13 @@
+---
+title: "Blog"
+listing:
+  contents:
+    - posts/welcome/index.qmd
+    - posts/bus-accessibility/index.qmd
+    - posts/data-warehouse/index.qmd
+  sort: "date desc"
+  type: default
+  categories: true
+page-layout: full
+title-block-banner: false
+---

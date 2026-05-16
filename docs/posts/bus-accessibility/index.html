@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nhu Nguyen">
-<meta name="dcterms.date" content="2025-09-20">
+<meta name="dcterms.date" content="2025-11-02">
+<meta name="description" content="A spatial analysis of bus stop coverage across 46,000+ residential mesh blocks using PostgreSQL/PostGIS and QGIS.">
 
-<title>Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe – Nhu Nguyen — Data &amp; Analytics</title>
+<title>Bus Accessibility in Metropolitan Melbourne – Nhu Nguyen — Data &amp; Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,62 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -87,8 +33,6 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -131,71 +75,13 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: [],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -402,40 +288,29 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#problem-description" id="toc-problem-description" class="nav-link active" data-scroll-target="#problem-description">Problem description</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
-  <ul class="collapse">
-  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data source</a></li>
-  <li><a href="#germany-vs-eueea" id="toc-germany-vs-eueea" class="nav-link" data-scroll-target="#germany-vs-eueea">Germany vs EU/EEA</a></li>
-  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Germany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe</h1>
+<h1 class="title">Bus Accessibility in Metropolitan Melbourne</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">health</div>
-    <div class="quarto-category">analytics</div>
-    <div class="quarto-category">assignment</div>
+    <div class="quarto-category">SQL</div>
+    <div class="quarto-category">Spatial Analysis</div>
+    <div class="quarto-category">PostgreSQL</div>
+    <div class="quarto-category">QGIS</div>
+    <div class="quarto-category">Data Visualisation</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    A spatial analysis of bus stop coverage across 46,000+ residential mesh blocks using PostgreSQL/PostGIS and QGIS.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -450,7 +325,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 20, 2025</p>
+      <p class="date">November 2, 2025</p>
     </div>
   </div>
   
@@ -462,278 +337,102 @@ window.Quarto = {
 </header>
 
 
-<section id="problem-description" class="level1">
-<h1>Problem description</h1>
-<p>Healthcare-associated infections (HAIs) are illnesses acquired during hospital care. They increase treatment costs, prolong hospital stays, and may lead to disability or death.</p>
-<p>Although Germany’s hospital prevalence of HAIs is lower than the EU/EEA average, the population-level burden is higher. This apparent paradox arises from Germany’s <em>high hospital admission rates</em> and <em>longer average lengths of stay</em>.</p>
-<p>This blog post analyses data from the ECDC Point Prevalence Survey (2011 - 2012) to explain Germany’s elevated burden and identify which infection types matter most. The five HAI types considered account for <strong>≈79%</strong> of HAIs in the PPS frame:<br>
-- Clostridioides difficile infection (CDI)<br>
-- Hospital-acquired pneumonia (HAP)<br>
-- Bloodstream infection (BSI)<br>
-- Urinary tract infection (UTI)<br>
-- Surgical site infection (SSI)</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>How well does Melbourne’s bus network actually serve its residents? This project investigates that question using real public transport and census data by combining SQL spatial analysis with GIS visualisation to uncover where the gaps are.</p>
 </section>
-<section id="analysis" class="level1">
-<h1>Analysis</h1>
-<section id="data-source" class="level2">
-<h2 class="anchored" data-anchor-id="data-source">Data source</h2>
-<p>This analysis draws on the <em>European Centre for Disease Prevention and Control (ECDC) Point Prevalence Survey, 2011–2012</em>. Burden estimates were calculated using the <em>BCoDE methodology</em> (Burden of Communicable Diseases in Europe), implemented in the <em>BHAI R package</em> <span class="citation" data-cites="willrich2019bhai">(<a href="#ref-willrich2019bhai" role="doc-biblioref">Willrich, Zacher, and Haller 2019</a>)</span>.</p>
-</section>
-<section id="germany-vs-eueea" class="level2">
-<h2 class="anchored" data-anchor-id="germany-vs-eueea">Germany vs EU/EEA</h2>
-<p><a href="#tbl-burden" class="quarto-xref">Table&nbsp;1</a> shows annual cases, deaths, and disability-adjusted life years (DALYs) per 100,000 population. Germany exceeds the EU/EEA average in all measures.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>burden <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metric   =</span> <span class="fu">c</span>(<span class="st">"Cases (per 100k)"</span>, <span class="st">"Deaths (per 100k)"</span>, <span class="st">"DALYs (per 100k)"</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany  =</span> <span class="fu">c</span>(<span class="dv">592</span>, <span class="fl">20.1</span>, <span class="dv">308</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA   =</span> <span class="fu">c</span>(<span class="dv">468</span>, <span class="fl">15.6</span>, <span class="dv">290</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  burden,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div id="tbl-burden" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-burden-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Estimated HAI burden per 100,000 population, Germany vs EU/EEA (2011–2012)
-</figcaption>
-<div aria-describedby="tbl-burden-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Metric</th>
-<th style="text-align: right;">Germany</th>
-<th style="text-align: right;">EU_EEA</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Cases (per 100k)</td>
-<td style="text-align: right;">592.0</td>
-<td style="text-align: right;">468.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Deaths (per 100k)</td>
-<td style="text-align: right;">20.1</td>
-<td style="text-align: right;">15.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">DALYs (per 100k)</td>
-<td style="text-align: right;">308.0</td>
-<td style="text-align: right;">290.0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p><a href="#fig-types" class="quarto-xref">Figure&nbsp;1</a> displays DALYs for major HAI types in Germany. Hospital-acquired pneumonia (HAP) and bloodstream infections (BSI) dominate mortality, while urinary tract infections (UTI) and surgical site infections (SSI) contribute to disability.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>types_totals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Infection =</span> <span class="fu">c</span>(<span class="st">"HAP"</span>,<span class="st">"BSI"</span>,<span class="st">"UTI"</span>,<span class="st">"SSI"</span>,<span class="st">"CDI"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">DALYs =</span> <span class="fu">c</span>(<span class="dv">69508</span>, <span class="dv">58350</span>, <span class="dv">66701</span>, <span class="dv">28842</span>, <span class="dv">20890</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(types_totals, <span class="fu">aes</span>(<span class="at">x =</span> Infection, <span class="at">y =</span> DALYs)) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#274060"</span>) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">comma</span>(DALYs)),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.35</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"DALYs by infection type in Germany (absolute)"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Infection type"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"DALYs (years)"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: ECDC PPS 2011–2012; BHAI estimates (German PPS sample)."</span>) <span class="sc">+</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#005c97"</span>),</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">10</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-types" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-types-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Germany’s HAI burden by infection type (DALYs, German PPS 2011–2012)
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="#tbl-type-rates" class="quarto-xref">Table&nbsp;2</a> breaks this down by infection type.<br>
-- Germany’s case rate for <strong>UTI</strong> is ~1.5× higher than the EU/EEA average (265 vs 175 per 100 k).<br>
-- <strong>CDI</strong> and <strong>BSI</strong> show notably higher fatality and DALY rates.<br>
-- <strong>HAP</strong> rates are slightly lower in Germany, yet the absolute burden remains large due to long stays and recurrent pneumonia among older inpatients.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>types_rates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Infection =</span> <span class="fu">c</span>(<span class="st">"HAP"</span>,<span class="st">"UTI"</span>,<span class="st">"BSI"</span>,<span class="st">"SSI"</span>,<span class="st">"CDI"</span>,<span class="st">"ALL"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany_cases =</span> <span class="fu">c</span>(<span class="fl">132.0</span>, <span class="fl">265.1</span>, <span class="fl">33.4</span>, <span class="fl">115.4</span>, <span class="fl">44.6</span>, <span class="fl">592.1</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA_cases  =</span> <span class="fu">c</span>(<span class="fl">143.7</span>, <span class="fl">174.7</span>, <span class="fl">22.2</span>, <span class="fl">111.3</span>, <span class="fl">16.0</span>, <span class="fl">467.9</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany_deaths =</span> <span class="fu">c</span>(<span class="fl">4.9</span>, <span class="fl">4.5</span>, <span class="fl">4.8</span>, <span class="fl">2.9</span>, <span class="fl">2.4</span>, <span class="fl">20.1</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA_deaths  =</span> <span class="fu">c</span>(<span class="fl">5.3</span>, <span class="fl">3.0</span>, <span class="fl">3.3</span>, <span class="fl">2.6</span>, <span class="fl">0.9</span>, <span class="fl">15.3</span>),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Germany_DALYs  =</span> <span class="fu">c</span>(<span class="fl">86.1</span>, <span class="fl">82.6</span>, <span class="fl">72.2</span>, <span class="fl">35.7</span>, <span class="fl">25.9</span>, <span class="fl">308.2</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">EU_EEA_DALYs   =</span> <span class="fu">c</span>(<span class="fl">109.8</span>, <span class="fl">57.1</span>, <span class="fl">76.2</span>, <span class="fl">35.1</span>, <span class="fl">10.0</span>, <span class="fl">290.0</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  types_rates,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>),</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Infection"</span>,<span class="st">"Cases DE"</span>,<span class="st">"Cases EU"</span>,<span class="st">"Deaths DE"</span>,<span class="st">"Deaths EU"</span>,<span class="st">"DALYs DE"</span>,<span class="st">"DALYs EU"</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div id="tbl-type-rates" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-type-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: HAI burden per 100,000 by infection type: Germany (PPS) vs EU/EEA (ECDC PPS), 2011–2012
-</figcaption>
-<div aria-describedby="tbl-type-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 13%">
-<col style="width: 13%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Infection</th>
-<th style="text-align: right;">Cases DE</th>
-<th style="text-align: right;">Cases EU</th>
-<th style="text-align: right;">Deaths DE</th>
-<th style="text-align: right;">Deaths EU</th>
-<th style="text-align: right;">DALYs DE</th>
-<th style="text-align: right;">DALYs EU</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">HAP</td>
-<td style="text-align: right;">132.0</td>
-<td style="text-align: right;">143.7</td>
-<td style="text-align: right;">4.9</td>
-<td style="text-align: right;">5.3</td>
-<td style="text-align: right;">86.1</td>
-<td style="text-align: right;">109.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">UTI</td>
-<td style="text-align: right;">265.1</td>
-<td style="text-align: right;">174.7</td>
-<td style="text-align: right;">4.5</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">82.6</td>
-<td style="text-align: right;">57.1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSI</td>
-<td style="text-align: right;">33.4</td>
-<td style="text-align: right;">22.2</td>
-<td style="text-align: right;">4.8</td>
-<td style="text-align: right;">3.3</td>
-<td style="text-align: right;">72.2</td>
-<td style="text-align: right;">76.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">SSI</td>
-<td style="text-align: right;">115.4</td>
-<td style="text-align: right;">111.3</td>
-<td style="text-align: right;">2.9</td>
-<td style="text-align: right;">2.6</td>
-<td style="text-align: right;">35.7</td>
-<td style="text-align: right;">35.1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">CDI</td>
-<td style="text-align: right;">44.6</td>
-<td style="text-align: right;">16.0</td>
-<td style="text-align: right;">2.4</td>
-<td style="text-align: right;">0.9</td>
-<td style="text-align: right;">25.9</td>
-<td style="text-align: right;">10.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ALL</td>
-<td style="text-align: right;">592.1</td>
-<td style="text-align: right;">467.9</td>
-<td style="text-align: right;">20.1</td>
-<td style="text-align: right;">15.3</td>
-<td style="text-align: right;">308.2</td>
-<td style="text-align: right;">290.0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p>Together, these tables demonstrate that Germany’s excess burden stems not from one pathogen but from <strong>system-wide exposure and patient throughput</strong>: more admissions and longer hospital stays amplify even modest infection risks.</p>
-</section>
-<section id="findings" class="level2">
-<h2 class="anchored" data-anchor-id="findings">Findings</h2>
+<section id="data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources">Data Sources</h2>
 <ul>
-<li><p>Germany had ≈478,000 cases, 16,000 deaths, and 249,000 DALYs from HAIs in 2011–2012</p></li>
-<li><p>HAP and BSI caused more than half the total burden despite fewer cases.</p></li>
-<li><p>UTI was the most common infection but had lower fatality.</p></li>
-<li><p>SSI contributed disproportionately to disability.</p></li>
-<li><p>HAIs imposed a greater health burden than influenza, salmonella, hepatitis B, and measles combined</p></li>
+<li><strong>PTV GTFS Data</strong> — routes, stops, trips, and timetables from the Public Transport Victoria Open Data Portal</li>
+<li><strong>ABS Mesh Block Boundaries</strong> — 2021 census geographic boundaries covering all of Metropolitan Melbourne</li>
 </ul>
-<p>These findings link back to the problem statement: Germany’s system-level hospital practices amplify the burden despite lower prevalence.</p>
+<p>Both datasets were loaded into PostgreSQL (with the PostGIS spatial extension) using a Docker environment managed through DBeaver and QGIS.</p>
+</section>
+<section id="what-i-did" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-did">What I Did</h2>
+<section id="data-cleaning-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning-preprocessing">Data Cleaning &amp; Preprocessing</h3>
+<ul>
+<li>Imported 11 core tables into a dedicated <code>ptv</code> schema in PostgreSQL</li>
+<li>Added geometry columns to the stops table using latitude/longitude coordinates (GDA2020 projection, SRID 7844)</li>
+<li>Filtered to bus-only routes (<code>route_type = 3</code>) and residential mesh blocks (<code>MB_CAT21 = 'Residential'</code>)</li>
+<li>Created a Greater Melbourne subset of 59,483 mesh blocks</li>
+</ul>
+</section>
+<section id="spatial-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-analysis">Spatial Analysis</h3>
+<p>Using <code>ST_Intersects</code>, I spatially joined each residential mesh block with bus stop locations to count how many stops fell within each block boundary. This produced a derived table (<code>bus_stops_per_block</code>) with stop counts per block.</p>
+<p>I also identified residential areas with <strong>zero</strong> bus stops — stored as <code>residential_no_bus</code>, to highlight the most underserved zones.</p>
+</section>
+<section id="visualisation" class="level3">
+<h3 class="anchored" data-anchor-id="visualisation">Visualisation</h3>
+<p>A heatmap was built in QGIS using the Viridis colour ramp with Natural Breaks (Jenks) classification:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Accessibility Level</th>
+<th>Stop Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No Access</td>
+<td>0 stops</td>
+</tr>
+<tr class="even">
+<td>Low Access</td>
+<td>1–2 stops</td>
+</tr>
+<tr class="odd">
+<td>Moderate Access</td>
+<td>3–5 stops</td>
+</tr>
+<tr class="even">
+<td>High Access</td>
+<td>6–10 stops</td>
+</tr>
+<tr class="odd">
+<td>Very High Access</td>
+<td>10+ stops</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="map.png" class="img-fluid figure-img"></p>
+<figcaption>Bus Accessibility in Metropolitan Melbourne — Residential Focus</figcaption>
+</figure>
+</div>
 </section>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>Germany’s elevated HAI burden is primarily system-driven rather than patient-driven.<br>
-Lower per-patient prevalence is outweighed by: 1. High hospital admission rates, and<br>
-2. Prolonged inpatient durations.</p>
-<p>The analysis shows that <strong>HAP</strong> and <strong>BSI</strong> drive mortality, while <strong>UTI</strong> and <strong>SSI</strong> dominate morbidity and disability.<br>
-This pattern mirrors findings by Cassini et al.&nbsp;(2016) <span class="citation" data-cites="cassini2016">(<a href="#ref-cassini2016" role="doc-biblioref">Cassini et al. 2016</a>)</span> and Zacher et al.&nbsp;(2019) <span class="citation" data-cites="zacher2019">(<a href="#ref-zacher2019" role="doc-biblioref">Zacher et al. 2019</a>)</span>, confirming that the national healthcare structure, rather than clinical hygiene alone that underlies the disproportionate population burden.</p>
-<p><strong>Key takeaway:</strong> To reduce the national burden of HAIs, Germany must pair infection control measures with <em>systemic reforms</em> that shorten hospital stays and optimize admission practices.</p>
-
-
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p>Out of <strong>46,608 total residential mesh blocks</strong> in Metropolitan Melbourne:</p>
+<ul>
+<li>Only <strong>11,264 (24.17%)</strong> contain at least one bus stop</li>
+<li><strong>76% of residential areas have no direct bus access</strong></li>
+<li>The average stop count is just <strong>0.43 stops per block</strong></li>
+<li>Dense coverage is concentrated in inner suburbs (Carlton, Richmond, Brunswick, South Yarra)</li>
+<li>Outer growth corridors — Melton, Clyde North, Wyndham Vale — are heavily underserved</li>
+</ul>
+</section>
+<section id="spatial-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-pattern">Spatial Pattern</h2>
+<p>The heatmap reveals a clear <strong>radial accessibility gradient</strong>: service density decreases steadily with distance from the CBD. Melbourne’s transport network is historically CBD-centric, and outer suburbs that depend on buses are the most disadvantaged.</p>
+</section>
+<section id="implications" class="level2">
+<h2 class="anchored" data-anchor-id="implications">Implications</h2>
+<p>These findings highlight a significant transport equity gap. Outer and newly developed suburbs lack reliable bus connectivity despite rapid population growth. The Victorian Government’s Bus Reform Plan (2023) identifies similar gaps — this analysis provides spatial evidence to support targeted network expansion.</p>
+</section>
+<section id="tools-used" class="level2">
+<h2 class="anchored" data-anchor-id="tools-used">Tools Used</h2>
+<p><code>PostgreSQL</code> · <code>PostGIS</code> · <code>QGIS</code> · <code>SQL</code> · <code>Docker</code> · <code>DBeaver</code></p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-cassini2016" class="csl-entry" role="listitem">
-Cassini, Alessandro, Diamantis Plachouras, Tim Eckmanns, Muna Abu Sin, Hans-Peter Blank, Thomas Ducomble, Sebastian Haller, et al. 2016. <span>“Burden of Six Healthcare-Associated Infections on European Population Health: Estimating Incidence-Based Disability-Adjusted Life Years Through a Population Prevalence-Based Modelling Study.”</span> <em>PLoS Medicine</em> 13 (10): e1002150. <a href="https://doi.org/10.1371/journal.pmed.1002150">https://doi.org/10.1371/journal.pmed.1002150</a>.
-</div>
-<div id="ref-willrich2019bhai" class="csl-entry" role="listitem">
-Willrich, Niklas, Benedikt Zacher, and Sebastian Haller. 2019. <em>BHAI: Burden of Healthcare-Associated Infections</em>. <a href="https://CRAN.R-project.org/package=BHAI">https://CRAN.R-project.org/package=BHAI</a>.
-</div>
-<div id="ref-zacher2019" class="csl-entry" role="listitem">
-Zacher, Benedikt, Sebastian Haller, Niklas Willrich, Jan Walter, Muna Abu Sin, Alessandro Cassini, Diamantis Plachouras, et al. 2019. <span>“Application of a New Methodology and r Package Reveals a High Burden of Healthcare-Associated Infections (HAI) in Germany Compared to the Average in the European Union/European Economic Area, 2011 to 2012.”</span> <em>Eurosurveillance</em> 24 (46): 1900135. <a href="https://doi.org/10.2807/1560-7917.ES.2019.24.46.1900135">https://doi.org/10.2807/1560-7917.ES.2019.24.46.1900135</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

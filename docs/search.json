@@ -28,6 +28,62 @@
     "text": "Findings\n\nGermany had ≈478,000 cases, 16,000 deaths, and 249,000 DALYs from HAIs in 2011–2012\nHAP and BSI caused more than half the total burden despite fewer cases.\nUTI was the most common infection but had lower fatality.\nSSI contributed disproportionately to disability.\nHAIs imposed a greater health burden than influenza, salmonella, hepatitis B, and measles combined\n\nThese findings link back to the problem statement: Germany’s system-level hospital practices amplify the burden despite lower prevalence."
   },
   {
+    "objectID": "posts/data-warehouse/index.html",
+    "href": "posts/data-warehouse/index.html",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "",
+    "text": "This project turned raw, messy operational data from a fictional equipment company (MonEquip) into a fully functioning business intelligence data warehouse — complete with cleaned facts, conformed dimensions, and actionable KPIs.\nThe dataset covered sales and hire transactions from April 2018 to December 2020."
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#overview",
+    "href": "posts/data-warehouse/index.html#overview",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "",
+    "text": "This project turned raw, messy operational data from a fictional equipment company (MonEquip) into a fully functioning business intelligence data warehouse — complete with cleaned facts, conformed dimensions, and actionable KPIs.\nThe dataset covered sales and hire transactions from April 2018 to December 2020."
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#the-problem-dirty-data",
+    "href": "posts/data-warehouse/index.html#the-problem-dirty-data",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "The Problem: Dirty Data",
+    "text": "The Problem: Dirty Data\nBefore any analysis could happen, the raw data needed serious cleaning. I identified and resolved 6 types of data errors:\n\n\n\n\n\n\n\nError Type\nDescription\n\n\n\n\nNegative quantities\nSales rows with quantity ≤ 0\n\n\nNegative/zero prices\nHire rows with invalid total prices\n\n\nDate inconsistencies\nEND_DATE before START_DATE\n\n\nDuplicate records\nCUSTOMER_ID appearing multiple times\n\n\nOrphan foreign keys\nHire rows referencing missing customers, equipment, or staff\n\n\nMismatched totals\nTOTAL_SALES_PRICE ≠ QUANTITY × UNIT_SALES_PRICE\n\n\n\nEach error type was quarantined into a dedicated issue table for audit traceability, then clean versions were built excluding invalid rows."
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#star-schema-design",
+    "href": "posts/data-warehouse/index.html#star-schema-design",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "Star Schema Design",
+    "text": "Star Schema Design\nI designed a multi-fact constellation (galaxy) schema with two primary fact tables sharing conformed dimensions:\nFact Tables:\n\nSalesFact — one row per sales transaction line\nHireFact — one row per hire transaction line\n\nShared Dimensions:\n\nTimeDim — pre-computed Year, Month, Season for trend analysis\nBranchDim — company branch locations\nCategoryDim — equipment categories (Earthmoving, Landscaping, etc.)\nCustomerTypeDim — Business vs Individual customers\n\nSales-only Dimension:\n\nSalesPriceScaleDim — Low / Medium / High price buckets\n\nAll fact-dimension joins were validated with zero missing keys before analysis."
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#key-findings",
+    "href": "posts/data-warehouse/index.html#key-findings",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "Key Findings",
+    "text": "Key Findings\n\nRevenue Overview (2018–2020)\n\n\n\nMetric\nSales\nHire\n\n\n\n\nTotal Revenue\n$11.58M\n$0.14M\n\n\nAvg per Transaction\n$77,220\n$470\n\n\nUnits\n393 sold\n617 hired\n\n\n\nSales completely dominate revenue. Hire generates many small, short transactions.\n\n\nTop Categories\nEarthmoving (17.6%) and Landscaping (13.3%) together account for over 30% of total sales revenue — the company’s core strength lies in heavy construction equipment.\n\n\nBranch Performance\nClayton branch leads with nearly $2.8M in revenue — more than double Parkville ($1.45M). Clayton has a diverse portfolio across almost all categories and acts as a central revenue hub.\n\n\nSeasonality\n\nSales peak in Summer and Spring, with a broad step-change growth of +57.5% in 2020\nHire peaks in Spring and Autumn — aligned with project start and finish windows\nSame-day hires account for only 9.9% of hire revenue; multi-day rentals dominate\n\n\n\nYear-over-Year Growth\n\n\n\nPeriod\nGrowth\n\n\n\n\n2018 → 2019\n+2.4%\n\n\n2019 → 2020\n+57.5%\n\n\n\nThe 2020 jump was broad-based across all months and seasons — suggesting a structural shift in demand rather than a one-off event."
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#visualisation",
+    "href": "posts/data-warehouse/index.html#visualisation",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "Visualisation",
+    "text": "Visualisation\nThe final analytics were visualised as a one-page poster in R, combining a star schema diagram, bar charts, donut charts, and a monthly revenue trend line.\n\n\n\nSales & Hire Analytics Poster"
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#tools-used",
+    "href": "posts/data-warehouse/index.html#tools-used",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "Tools Used",
+    "text": "Tools Used\nOracle SQL · R · ggplot2 · Lucidchart · DBeaver · Star Schema Design"
+  },
+  {
+    "objectID": "posts/data-warehouse/index.html#takeaways",
+    "href": "posts/data-warehouse/index.html#takeaways",
+    "title": "Sales & Hire Analytics: Building a Data Warehouse from Scratch",
+    "section": "Takeaways",
+    "text": "Takeaways\nThis project taught me how real-world data is never clean, and how important it is to build auditable cleaning pipelines before touching any analysis. Designing the star schema also showed me how grain decisions — what one row represents — fundamentally shape what questions you can and can’t answer downstream."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "\nHi, I’m Nhu Nguyen\n",
@@ -75,6 +131,69 @@
     "title": "Nhu Nguyen",
     "section": "",
     "text": "📍 Melbourne, Australia\n🔗 LinkedIn · GitHub\n✉️ nguyenthuynhu2603@gmail.com"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Bus Accessibility in Metropolitan Melbourne\n\n\n\nSQL\n\nSpatial Analysis\n\nPostgreSQL\n\nQGIS\n\nData Visualisation\n\n\n\nA spatial analysis of bus stop coverage across 46,000+ residential mesh blocks using PostgreSQL/PostGIS and QGIS.\n\n\n\n\n\nNov 2, 2025\n\n\nNhu Nguyen\n\n\n\n\n\n\n\n\n\n\n\n\nSales & Hire Analytics: Building a Data Warehouse from Scratch\n\n\n\nSQL\n\nData Warehouse\n\nOracle\n\nR\n\nData Cleaning\n\nBusiness Analytics\n\n\n\nDesigning a star schema data warehouse in Oracle SQL — cleaning messy real-world data, building fact and dimension tables, and uncovering $11.58M in business insights.\n\n\n\n\n\nSep 27, 2025\n\n\nNhu Nguyen\n\n\n\n\n\n\n\n\n\n\n\n\nGermany’s Hidden Burden: Healthcare-Associated Infections Compared to Europe\n\n\n\nhealth\n\nanalytics\n\nassignment\n\n\n\n\n\n\n\n\n\nSep 20, 2025\n\n\nNhu Nguyen\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html",
+    "href": "posts/bus-accessibility/index.html",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "",
+    "text": "How well does Melbourne’s bus network actually serve its residents? This project investigates that question using real public transport and census data by combining SQL spatial analysis with GIS visualisation to uncover where the gaps are."
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#overview",
+    "href": "posts/bus-accessibility/index.html#overview",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "",
+    "text": "How well does Melbourne’s bus network actually serve its residents? This project investigates that question using real public transport and census data by combining SQL spatial analysis with GIS visualisation to uncover where the gaps are."
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#data-sources",
+    "href": "posts/bus-accessibility/index.html#data-sources",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "Data Sources",
+    "text": "Data Sources\n\nPTV GTFS Data — routes, stops, trips, and timetables from the Public Transport Victoria Open Data Portal\nABS Mesh Block Boundaries — 2021 census geographic boundaries covering all of Metropolitan Melbourne\n\nBoth datasets were loaded into PostgreSQL (with the PostGIS spatial extension) using a Docker environment managed through DBeaver and QGIS."
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#what-i-did",
+    "href": "posts/bus-accessibility/index.html#what-i-did",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "What I Did",
+    "text": "What I Did\n\nData Cleaning & Preprocessing\n\nImported 11 core tables into a dedicated ptv schema in PostgreSQL\nAdded geometry columns to the stops table using latitude/longitude coordinates (GDA2020 projection, SRID 7844)\nFiltered to bus-only routes (route_type = 3) and residential mesh blocks (MB_CAT21 = 'Residential')\nCreated a Greater Melbourne subset of 59,483 mesh blocks\n\n\n\nSpatial Analysis\nUsing ST_Intersects, I spatially joined each residential mesh block with bus stop locations to count how many stops fell within each block boundary. This produced a derived table (bus_stops_per_block) with stop counts per block.\nI also identified residential areas with zero bus stops — stored as residential_no_bus, to highlight the most underserved zones.\n\n\nVisualisation\nA heatmap was built in QGIS using the Viridis colour ramp with Natural Breaks (Jenks) classification:\n\n\n\nAccessibility Level\nStop Count\n\n\n\n\nNo Access\n0 stops\n\n\nLow Access\n1–2 stops\n\n\nModerate Access\n3–5 stops\n\n\nHigh Access\n6–10 stops\n\n\nVery High Access\n10+ stops\n\n\n\n\n\n\nBus Accessibility in Metropolitan Melbourne — Residential Focus"
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#key-findings",
+    "href": "posts/bus-accessibility/index.html#key-findings",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "Key Findings",
+    "text": "Key Findings\nOut of 46,608 total residential mesh blocks in Metropolitan Melbourne:\n\nOnly 11,264 (24.17%) contain at least one bus stop\n76% of residential areas have no direct bus access\nThe average stop count is just 0.43 stops per block\nDense coverage is concentrated in inner suburbs (Carlton, Richmond, Brunswick, South Yarra)\nOuter growth corridors — Melton, Clyde North, Wyndham Vale — are heavily underserved"
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#spatial-pattern",
+    "href": "posts/bus-accessibility/index.html#spatial-pattern",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "Spatial Pattern",
+    "text": "Spatial Pattern\nThe heatmap reveals a clear radial accessibility gradient: service density decreases steadily with distance from the CBD. Melbourne’s transport network is historically CBD-centric, and outer suburbs that depend on buses are the most disadvantaged."
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#implications",
+    "href": "posts/bus-accessibility/index.html#implications",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "Implications",
+    "text": "Implications\nThese findings highlight a significant transport equity gap. Outer and newly developed suburbs lack reliable bus connectivity despite rapid population growth. The Victorian Government’s Bus Reform Plan (2023) identifies similar gaps — this analysis provides spatial evidence to support targeted network expansion."
+  },
+  {
+    "objectID": "posts/bus-accessibility/index.html#tools-used",
+    "href": "posts/bus-accessibility/index.html#tools-used",
+    "title": "Bus Accessibility in Metropolitan Melbourne",
+    "section": "Tools Used",
+    "text": "Tools Used\nPostgreSQL · PostGIS · QGIS · SQL · Docker · DBeaver"
   },
   {
     "objectID": "posts/welcome/blog_review.html",
